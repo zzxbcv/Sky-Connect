@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Main.css">
+    <!-- Remname this to the name of your page eg Team for team page -->
+    <title>Template</title>
+</head>
+<body>
+    <!-- sidebar here -->
+    <div class="sidebar">
+        <!-- Logo here -->
+        <a href="">
+            <img class="logo" src="Vector.svg" alt="Sky Connect logo">
+        </a>
+        <!-- add href to your page here -->
+        <ul>
+            <li>
+                <button class="sidebarButton">
+                    <a class="SidebarText" href="">Dashboard</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <a class="SidebarText" href="">Teams</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <a class="SidebarText" href="">Organization</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <a class="SidebarText" href="">Messages</a>
+                </button>
+            </li>
+            <li><button class="sidebarButton">
+                <a class="SidebarText" href="">Schedule</a>
+            </button>
+        </li>
+        </ul>
+    </div>
+    <!-- Page content here do NOT write code out side of the div below or it wont show up in the content section -->
+    <div class="mainContent">
+        <header>
+            <h1 class="pageTitle">Template</h1>
+            <div class="dropdown">
+                <button class="headerButton" onclick="toggleDropdown()">Username</button>
+                <div class="dropdownContent" id="dropdownMenu">
+                    <button class="dropdownButton">
+                        <a class="dropdownText" href="">Settings</a>
+                    </button>
+                    <button class="dropdownButton">
+                        <a class="dropdownText" href="">Profile</a>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+</body>
+</html>
+
+<script>
+function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+</script>
