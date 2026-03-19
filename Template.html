@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Main.css">
+    <link rel="icon" type="image/svg+xml" href="TitleLogo.svg">
     <!-- Remname this to the name of your page eg Team for team page -->
     <title>Template</title>
 </head>
@@ -12,7 +13,7 @@
     <div class="sidebar">
         <!-- Logo here -->
         <a href="">
-            <img class="logo" src="Vector.svg" alt="Sky Connect logo">
+            <img class="logo" src="Logo.svg" alt="Sky Connect logo">
         </a>
         <!-- add href to your page here -->
         <ul>
@@ -47,7 +48,9 @@
         <header>
             <h1 class="pageTitle">Template</h1>
             <div class="dropdown">
-                <button class="headerButton" onclick="toggleDropdown()">Username</button>
+                <div>
+                    <button class="headerButton" onclick="toggleDropdown()"><img class="headerProfilePic" src="DefaultProfilePic.svg" alt="Default profile picture">Username</button>
+                </div>
                 <div class="dropdownContent" id="dropdownMenu">
                     <button class="dropdownButton">
                         <a class="dropdownText" href="">Settings</a>
@@ -58,6 +61,7 @@
                 </div>
             </div>
         </header>
+        <footer><p class="footerText">&#169;Sky Connect 2026</p></footer>
     </div>
 </body>
 </html>

@@ -51,7 +51,7 @@ p{
     width: 260px;
     font-size: 1.5em;
     color: rgba(255,255,255,1);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    transition: background-color 1s ease, box-shadow 1s ease;
 }
 
 .SidebarText{
@@ -92,6 +92,11 @@ header{
     justify-content: space-between;
 }
 
+.headerProfilePic{
+    height: 1.5em;
+    width: auto;
+}
+
 .headerButton{
     background-color: rgba(217, 217, 217,0.3);
     padding: 10px;
@@ -102,7 +107,10 @@ header{
     color: rgba(0,0,0,1);
     right: 0;
     margin-right: 20px;
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 1s ease, box-shadow 1s ease;
 }
 
 .dropdownButton{
@@ -116,7 +124,7 @@ header{
     right: 0;
     margin-right: 20px;
     margin-bottom: 5px;
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    transition: background-color 1s ease, box-shadow 1s ease;
 }
 
 .dropdownText{
@@ -151,4 +159,19 @@ header{
     background-color: rgba(217, 217, 217,0.5);
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+footer{
+    font-size: 1em;
+    background-color: rgba(255,255,255,1);
+    width: calc(100% - 450px);
+    bottom: 0;  
+    position: fixed;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.footerText{
+    margin: 0;
 }
