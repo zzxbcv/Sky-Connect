@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Main.css">
-    <link rel="icon" type="image/svg+xml" href="TitleLogo.svg">
+    <link rel="stylesheet" href="{% static 'css/Main.css' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/TitleLogo.svg' %}">
     <!-- Remname this to the name of your page eg Team for team page -->
     <title>Template</title>
 </head>
@@ -13,7 +14,7 @@
     <div class="sidebar">
         <!-- Logo here -->
         <a href="">
-            <img class="logo" src="Logo.svg" alt="Sky Connect logo">
+            <img class="logo" src="{% static 'images/Logo.svg' %}" alt="Sky Connect logo">
         </a>
         <!-- add href to your page here -->
         <ul>

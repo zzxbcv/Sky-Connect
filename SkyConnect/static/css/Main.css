@@ -134,7 +134,6 @@ header{
 }
 
 .dropdown{
-    position: fixed;
     right: 20px;
 }
 
@@ -164,9 +163,10 @@ header{
 footer{
     font-size: 1em;
     background-color: rgba(255,255,255,1);
-    width: calc(100% - 450px);
-    bottom: 0;  
     position: fixed;
+    left: 422px; /* MATCHES .mainContent margin */
+    right: 0;
+    bottom: 0;
     padding: 5px 20px;
     display: flex;
     justify-content: flex-end; 

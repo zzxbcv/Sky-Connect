@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/Main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Messages.css' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/TitleLogo.svg' %}">
+    <!-- Remname this to the name of your page eg Team for team page -->
+    <title>Messages</title>
+</head>
+<body>
+    <!-- sidebar here -->
+    <div class="sidebar">
+        <!-- Logo here -->
+        <a href="">
+            <img class="logo" src="{% static 'images/Logo.svg' %}" alt="Sky Connect logo">
+        </a>
+        <!-- add href to your page here -->
+        <ul>
+           
+            <li>
+                <button class="sidebarButton">
+                    <!-- add the file name of your part of the website here -->
+                    <a class="SidebarText" href="">Teams</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <!-- add the file name of your part of the website here -->
+                    <a class="SidebarText" href="">Organization</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <!-- add the file name of your part of the website here -->
+                    <a class="SidebarText" href="">Messages</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <!-- add the file name of your part of the website here -->
+                    <a class="SidebarText" href="">Schedule</a>
+                </button>
+            </li>
+            <li>
+                <button class="sidebarButton">
+                    <!-- add the file name of your part of the website here -->
+                    <a class="SidebarText" href="">Reports</a>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <!-- Page content here do NOT write code out side of the div below or it wont show up in the content section -->
+    <div class="mainContent">
+        <header>
+            <h1 class="pageTitle">Contact Teams</h1>
+            <div class="dropdown">
+                <div>
+                    <button class="headerButton" onclick="toggleDropdown()"><img class="headerProfilePic" src="{% static 'images/DefaultProfilePic.svg' %}">Username</button>
+                </div>
+                <div class="dropdownContent" id="dropdownMenu">
+                    <button class="dropdownButton">
+                        <a class="dropdownText" href="">Settings</a>
+                    </button>
+                    <button class="dropdownButton">
+                        <a class="dropdownText" href="">Profile</a>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- start your code here -->
+
+    <div class="messagesLayout">
+
+        <!-- LEFT PANEL -->
+        <div class="messagesLeft">
+
+            <!-- Menu -->
+            <div class="messagesCard messagesMenuCard">
+                <div class="messagesMenuList">
+                    <div class="messagesMenuItem activeTab" onclick="switchTab('new', event)">New Message</div>
+                    <div class="messagesMenuItem" onclick="switchTab('inbox', event)">Inbox</div>
+                    <div class="messagesMenuItem" onclick="switchTab('sent', event)">Sent</div>
+                    <div class="messagesMenuItem" onclick="switchTab('draft', event)">Draft</div>
+                </div>
+            </div>
+
+            <!-- LEFT CONTENT (changes per tab) -->
+            <div class="messagesCard">
+
+                <!-- NEW MESSAGE -->
+                <div id="left-new" class="tabContent">
+                    <h3>Recent Messages</h3>
+                    <p>No recent messages</p>
+                </div>
+
+                <!-- INBOX -->
+                <div id="left-inbox" class="tabContent" style="display:none;">
+                    <h3>Pinned Messages</h3>
+                    <p>No pinned messages</p>
+                </div>
+
+                <!-- SENT -->
+                <div id="left-sent" class="tabContent" style="display:none;">
+                    <h3>Pinned Messages</h3>
+                    <p>No pinned messages</p>
+                </div>
+
+                <!-- DRAFT -->
+                <div id="left-draft" class="tabContent" style="display:none;">
+                    <h3>Pinned Messages</h3>
+                    <p>No pinned messages</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="messagesRight">
+
+            <!-- NEW MESSAGE (FORM) -->
+            <div id="right-new" class="messagesCard messagesFormCard tabContent">
+
+                <div class="messagesFormTop">
+                    <label class="messagesLabel">Select Team</label>
+                    <select class="messagesInputLarge">
+                        <option>Select a team</option>
+                    </select>
+
+                    <div class="messagesRow">
+                        <div class="messagesField">
+                            <label class="messagesLabel">Your Name</label>
+                            <input type="text" class="messagesInput">
+                        </div>
+
+                        <div class="messagesField">
+                            <label class="messagesLabel">Your Email</label>
+                            <input type="email" class="messagesInput">
+                        </div>
+                    </div>
+
+                    <div class="messagesField">
+                        <label class="messagesLabel">Subject</label>
+                        <input type="text" class="messagesInput">
+                    </div>
+                </div>
+
+                <div class="messagesFormMiddle">
+                    <label class="messagesLabel">Message</label>
+                    <textarea class="messagesTextarea"></textarea>
+                </div>
+
+                <div class="messagesActions">
+                    <button class="messagesSecondaryBtn">Cancel</button>
+                    <button class="messagesPrimaryBtn">Send Message</button>
+                </div>
+
+            </div>
+
+            <!-- INBOX -->
+            <div id="right-inbox" class="messagesCard tabContent" style="display:none;">
+                <h3>Inbox Messages</h3>
+                <p>No messages in inbox</p>
+            </div>
+
+            <!-- SENT -->
+            <div id="right-sent" class="messagesCard tabContent" style="display:none;">
+                <h3>Sent Messages</h3>
+                <p>No sent messages</p>
+            </div>
+
+            <!-- DRAFT -->
+            <div id="right-draft" class="messagesCard tabContent" style="display:none;">
+                <h3>Draft Messages</h3>
+                <p>No drafts saved</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+        <footer><p class="footerText">&#169;Sky Connect 2026</p></footer>
+    </div>
+</body>
+</html>
+
+<script>
+function toggleDropdown() {
+    const menu = document.getElementById("dropdownMenu");
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+
+function switchTab(tab, event) {
+
+    // HIDE ALL LEFT + RIGHT CONTENT
+    const allTabs = document.querySelectorAll(".tabContent");
+    allTabs.forEach(t => t.style.display = "none");
+
+    // SHOW SELECTED LEFT + RIGHT
+    document.getElementById("left-" + tab).style.display = "block";
+    document.getElementById("right-" + tab).style.display = "block";
+
+    // UPDATE ACTIVE BUTTON
+    const buttons = document.querySelectorAll(".messagesMenuItem");
+    buttons.forEach(btn => btn.classList.remove("activeTab"));
+
+    event.target.classList.add("activeTab");
+}
+</script>
