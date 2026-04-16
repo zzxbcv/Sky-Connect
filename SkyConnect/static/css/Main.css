@@ -166,7 +166,7 @@ footer{
     position: fixed;
     left: 422px; /* MATCHES .mainContent margin */
     right: 0;
-    bottom: 0;
+    bottom: 0; 
     padding: 5px 20px;
     display: flex;
     justify-content: flex-end; 
