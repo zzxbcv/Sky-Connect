@@ -1,0 +1,81 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* PAGE */
+.signupPage {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #1CB3FE, #0b4f6c);
+    font-family: Arial, sans-serif;
+}
+
+/* CARD */
+.signupCard {
+    background: #f4f4f4;
+    padding: 40px;
+    border-radius: 15px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* LOGO */
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.logoContainer img {
+    width: 140px;
+}
+
+/* LABELS */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: #e9ecef;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+/* BUTTON */
+.primaryBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #1CB3FE;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.primaryBtn:hover {
+    background: #1593d1;
+}
+
+/* BACK LINK */
+.backLink {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #1CB3FE;
+    text-decoration: none;
+    font-size: 0.9em;
+}

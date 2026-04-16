@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+
+<div class="signupPage">
+
+    <div class="signupCard">
+
+        <!-- Logo -->
+        <div class="logoContainer">
+            <img src="{% static 'images/LoginLogo.svg' %}" alt="Sky Connect">
+        </div>
+
+        <!-- FORM -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Email address</label>
+            <input type="email" name="email" required>
+
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <label>Confirm password</label>
+            <input type="password" name="confirm_password" required>
+
+            <button type="submit" class="primaryBtn">Sign up</button>
+
+            <a href="/login/" class="backLink">Back to sign in</a>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
