@@ -40,7 +40,6 @@ p{
     height: 150px;
     width: auto;
     margin-top: 50px;
-    margin-bottom: 50px;
 }
 
 .sidebarButton{
@@ -73,6 +72,24 @@ ul{
 li{
     list-style: none;
     padding: 30px;
+}
+
+@media (max-height: 800px) {
+    li{
+        padding: 25px;
+    }
+}
+
+@media (max-height: 750px) {
+    li{
+        padding: 20px;
+    }
+}
+
+@media (max-height: 700px) {
+    li{
+        padding: 15px;
+    }
 }
 
 .mainContent{
@@ -121,7 +138,6 @@ header{
     width: 150px;
     font-size: 0.8em;
     color: rgba(0,0,0,1);
-    right: 0;
     margin-right: 20px;
     margin-bottom: 5px;
     transition: background-color 1s ease, box-shadow 1s ease;
@@ -134,16 +150,19 @@ header{
 }
 
 .dropdown{
-    right: 20px;
+    position: relative; /* ADD THIS */
+    margin-right: 20px; /* move spacing here instead */
+     display: inline-block;
 }
 
 .dropdownContent{
     display: none;
     position: absolute;
     background-color: rgba(255,255,255,1);
-    right: 20px;
+    right: 0;
     padding: 10px;
-    top: 52px;
+    top: 100%;
+    margin-top: 8px;
     width: 150px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }

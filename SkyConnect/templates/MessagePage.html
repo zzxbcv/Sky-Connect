@@ -78,10 +78,13 @@
                     <div id="left-inbox" class="tabContent" style="display:none;">
                         <h3>Inbox</h3>
                         {% for msg in inbox %}
-                            <a href="?message_id={{ msg.id }}">
-                                <div>
-                                    <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
-                                    {{ msg.sender.username }}
+                            <a class="previewText" href="?message_id={{ msg.id }}">
+                                <div class="previewMessage">
+                                    <div class="messageText">{{ msg.sender.username }}</div>
+                                    <strong class="previewText messageText">{{ msg.subject }}</strong><br>  
+                                    <div class="messageText">
+                                        {{ msg.body|truncatechars:20 }}
+                                    </div>            
                                 </div>
                             </a>
                             <hr>
@@ -94,10 +97,13 @@
                     <div id="left-sent" class="tabContent" style="display:none;">
                         <h3>Sent</h3>
                         {% for msg in sent %}
-                            <a href="?message_id={{ msg.id }}">
-                                <div>
-                                    <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
-                                    To: {{ msg.receiver.username }}
+                            <a class="previewText" href="?message_id={{ msg.id }}">
+                                <div class="previewMessage">
+                                    <strong class="previewText messageText">{{ msg.subject }}</strong><br>
+                                    <div class="messageText">To: {{ msg.receiver.username }}</div>
+                                    <div class="messageText">
+                                        {{ msg.body|truncatechars:20 }}
+                                    </div>
                                 </div>
                             </a>
                             <hr>
@@ -110,10 +116,14 @@
                     <div id="left-draft" class="tabContent" style="display:none;">
                         <h3>Draft Messages</h3>
                         {% for msg in drafts %}
-                            <a href="?message_id={{ msg.id }}">
-                                <div>
-                                    <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
+                            <a class="previewText" href="?message_id={{ msg.id }}">
+                                <div class="previewMessage">
                                     Draft
+                                    <strong class="previewText messageText">{{ msg.subject }}</strong><br>
+                                    <div class="messageText">To: {{ msg.receiver.username }}</div>
+                                    <div class="messageText">
+                                        {{ msg.body|truncatechars:20 }}
+                                    </div>
                                 </div>
                             </a>
                             <hr>
@@ -140,6 +150,10 @@
                         <form method="POST">
                             {% csrf_token %}
 
+                            {% if selected_message and selected_message.is_draft %}
+                                <input type="hidden" name="draft_id" value="{{ selected_message.id }}">
+                            {% endif %}
+
                             <div class="messagesFormTop">
                                 <div class="messagesField">
                                     <label class="messagesLabel">Recipient Email</label>
@@ -153,7 +167,7 @@
                                     <input type="text" name="subject"
                                            value="{{ selected_message.subject|default:'' }}"
                                            class="messagesInput">
-                                </div>
+                                </div>                                
                             </div>
 
                             <div class="messagesFormMiddle">
@@ -163,12 +177,32 @@
 
                             <div class="messagesActions">
                                 <button type="reset" class="messagesSecondaryBtn">Cancel</button>
-                                <button type="submit" name="action" value="draft" class="messagesPrimaryBtn">
+
+                                {% if selected_message and selected_message.is_draft %}
+                                    <button type="submit"
+                                            name="action"
+                                            value="delete"
+                                            class="deleteDraft">
+                                        Delete Draft
+                                    </button>
+                                {% endif %}
+
+                                <button type="submit"
+                                        name="action"
+                                        value="draft"
+                                        class="messagesPrimaryBtn"
+                                        onclick="removeRequired(); checkDraftEmpty(event)">
                                     Save Draft
                                 </button>
-                                <button type="submit" name="action" value="send" class="messagesPrimaryBtn">
+                                
+                                <button type="submit"
+                                        name="action"
+                                        value="send"
+                                        class="messagesPrimaryBtn"
+                                        onclick="addRequired()">
                                     Send Message
                                 </button>
+                                
                             </div>
                         </form>
                     {% endif %}
@@ -178,9 +212,12 @@
                 <div id="right-inbox" class="messagesCard tabContent" style="display:none;">
                     <h3>Inbox Messages</h3>
                     {% for msg in inbox %}
-                        <div onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
-                            <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
-                            From: {{ msg.sender.username }}
+                        <div class="previewMessage" onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
+                            <div class="messageText">{{ msg.sender.username }}</div>
+                            <strong class="previewText messageText">{{ msg.subject }}</strong><br>   
+                            <div class="messageText">
+                                {{ msg.body|truncatechars:100 }}
+                            </div> 
                         </div>
                         <hr>
                     {% empty %}
@@ -192,9 +229,12 @@
                 <div id="right-sent" class="messagesCard tabContent" style="display:none;">
                     <h3>Sent Messages</h3>
                     {% for msg in sent %}
-                        <div onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
-                            <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
-                            To: {{ msg.receiver.username }}
+                        <div class="previewMessage" onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
+                            <strong class="previewText messageText">{{ msg.subject }}</strong><br>
+                            <div class="messageText">To: {{ msg.receiver.username }}</div>
+                            <div class="messageText">
+                                {{ msg.body|truncatechars:100 }}
+                            </div>
                         </div>
                         <hr>
                     {% empty %}
@@ -206,9 +246,13 @@
                 <div id="right-draft" class="messagesCard tabContent" style="display:none;">
                     <h3>Draft Messages</h3>
                     {% for msg in drafts %}
-                        <div onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
-                            <strong>{{ msg.subject|truncatechars:100 }}</strong><br>
+                        <div class="previewMessage" onclick="window.location.href='?message_id={{ msg.id }}'" style="cursor:pointer;">
                             Draft
+                            <strong class="previewText messageText">{{ msg.subject }}</strong><br>
+                            <div class="messageText">To: {{ msg.receiver.username }}</div>
+                            <div class="messageText">
+                                {{ msg.body|truncatechars:100 }}
+                            </div>
                         </div>
                         <hr>
                     {% empty %}
@@ -247,6 +291,27 @@
             document.querySelectorAll(".messagesMenuItem").forEach(btn => btn.classList.remove("activeTab"));
             event.target.classList.add("activeTab");
         }
+
+        function addRequired(){
+            document.querySelector('input[name="receiver_email"]').setAttribute("required", "true");
+            document.querySelector('input[name="subject"]').setAttribute("required", "true");
+        }
+
+        function removeRequired(){
+            document.querySelector('input[name="receiver_email"]').removeAttribute("required");
+            document.querySelector('input[name="subject"]').removeAttribute("required");
+        }
+
+        function checkDraftEmpty(event){
+            const email = document.querySelector('input[name="receiver_email"]').value.trim();
+            const subject = document.querySelector('input[name="subject"]').value.trim();
+            const body = document.querySelector('textarea[name="body"]').value.trim();
+
+            if(!email && !subject && !body){
+                event.preventDefault();
+                alert("Draft cannot be empty");
+            }
+        }   
     </script>
 </body>
 </html>
