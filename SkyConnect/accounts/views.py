@@ -5,10 +5,6 @@ from django.shortcuts import render, redirect
 from user_messages.models import user_messages
 
 
-# -----------------------
-# AUTH VIEWS
-# -----------------------
-
 def login_view(request):
     if request.method == 'POST':
         user = authenticate(
@@ -16,10 +12,10 @@ def login_view(request):
             username=request.POST.get('username'),
             password=request.POST.get('password')
         )
-
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect('dashboard')
+        return redirect('login')
 
     return render(request, 'login.html')
 
@@ -37,31 +33,24 @@ def signup_view(request):
                 email=email,
                 password=password
             )
-            return redirect('/login/')
+            return redirect('login')
 
     return render(request, "signup.html")
 
-
-# -----------------------
-# MESSAGE HELPERS
-# -----------------------
 
 def delete_message(request):
     delete_id = request.POST.get("delete_id")
 
     if not delete_id:
-        return redirect("messages")
+        return redirect('messages')
 
     try:
-        msg = user_messages.objects.get(
-            id=delete_id,
-            sender=request.user
-        )
+        msg = user_messages.objects.get(id=delete_id, sender=request.user)
         msg.delete()
     except user_messages.DoesNotExist:
         pass
 
-    return redirect("messages")
+    return redirect('messages')
 
 
 def save_or_update_message(request):
@@ -72,45 +61,33 @@ def save_or_update_message(request):
     body = request.POST.get("body")
     receiver_email = request.POST.get("receiver_email")
 
-    # 🚫 HARD BLOCK: never process if delete button was used
     if request.POST.get("delete_btn"):
-        return redirect("messages")
+        return redirect('messages')
 
-    # 🚫 require valid action
     if action not in ["send", "draft"]:
-        return redirect("messages")
+        return redirect('messages')
 
-    # 🚫 sending requires subject + receiver
     if action == "send":
         if not subject or not receiver_email:
-            return redirect("messages")
+            return redirect('messages')
 
     receiver = None
     if receiver_email:
         receiver = User.objects.filter(email=receiver_email).first()
-
         if not receiver and action == "send":
-            return redirect("messages")
+            return redirect('messages')
 
     if message_id:
         try:
-            msg = user_messages.objects.get(
-                id=message_id,
-                sender=request.user
-            )
-
+            msg = user_messages.objects.get(id=message_id, sender=request.user)
             msg.subject = subject
             msg.body = body
             msg.receiver = receiver
-
             if action == "send":
                 msg.is_draft = False
-
             msg.save()
-
         except user_messages.DoesNotExist:
             pass
-
     else:
         user_messages.objects.create(
             sender=request.user,
@@ -120,42 +97,23 @@ def save_or_update_message(request):
             is_draft=(action == "draft")
         )
 
-    return redirect("messages")
+    return redirect('messages')
 
-
-# -----------------------
-# MAIN PAGE
-# -----------------------
 
 @login_required
 def messages_page(request):
-
     if request.method == "POST":
-
-        # ✅ STRICT DELETE ONLY
         if request.POST.get("delete_btn"):
             return delete_message(request)
 
-        # ✅ STRICT SEND/DRAFT ONLY
         if request.POST.get("action"):
             return save_or_update_message(request)
 
-        return redirect("messages")
+        return redirect('messages')
 
-    inbox = user_messages.objects.filter(
-        receiver=request.user,
-        is_draft=False
-    )
-
-    sent = user_messages.objects.filter(
-        sender=request.user,
-        is_draft=False
-    )
-
-    drafts = user_messages.objects.filter(
-        sender=request.user,
-        is_draft=True
-    )
+    inbox = user_messages.objects.filter(receiver=request.user, is_draft=False)
+    sent = user_messages.objects.filter(sender=request.user, is_draft=False)
+    drafts = user_messages.objects.filter(sender=request.user, is_draft=True)
 
     message_id = request.GET.get("message_id")
     selected_message = None
@@ -164,8 +122,6 @@ def messages_page(request):
     if message_id:
         try:
             selected_message = user_messages.objects.get(id=message_id)
-
-            # 🔒 SECURITY
             if selected_message.sender != request.user and selected_message.receiver != request.user:
                 selected_message = None
             else:
@@ -173,7 +129,6 @@ def messages_page(request):
                     mode = "edit"
                 else:
                     mode = "view"
-
         except user_messages.DoesNotExist:
             pass
 

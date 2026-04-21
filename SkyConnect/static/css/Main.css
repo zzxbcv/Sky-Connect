@@ -51,6 +51,16 @@ p{
     font-size: 1.5em;
     color: rgba(255,255,255,1);
     transition: background-color 1s ease, box-shadow 1s ease;
+    padding: 0;
+}
+
+.sidebarButton a {
+    display: block;
+    width: 260px;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
 .SidebarText{
@@ -132,6 +142,29 @@ header{
 
 .dropdownButton{
     background-color: rgba(217, 217, 217,0.3);
+    padding: 0px;
+    border-radius: 5px;
+    border: 2px solid rgba(217, 217, 217,0.3);
+    width: 150px;
+    font-size: 0.8em;
+    color: rgba(0,0,0,1);
+    margin-right: 20px;
+    margin-bottom: 5px;
+    transition: background-color 1s ease, box-shadow 1s ease;
+}
+
+.dropdownButton a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logoutButton{
+    background-color: rgba(217, 217, 217,0.3);
     padding: 10px;
     border-radius: 5px;
     border: 2px solid rgba(217, 217, 217,0.3);
@@ -174,6 +207,12 @@ header{
 }
 
 .dropdownButton:hover{
+    background-color: rgba(217, 217, 217,0.5);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.logoutButton:hover{
     background-color: rgba(217, 217, 217,0.5);
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
