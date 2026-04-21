@@ -21,7 +21,23 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', include('accounts.urls')),      # login/signup
-    path('messages/', include('user_messages.urls')),  # messages page
+    # Auth (login, signup)
+    path('', include('accounts.urls')),
+
+    # Messages app (Student 3)
+    path('messages/', include('user_messages.urls')),
+
+    # Teams app (Student 1) — add when ready
+    # path('teams/', include('teams.urls')),
+
+    # Organisation app (Student 2) — add when ready
+    # path('organisation/', include('organisation.urls')),
+
+    # Schedule app (Student 4) — add when ready
+    # path('schedule/', include('schedule.urls')),
+
+    # Report app (Student 5) — add when ready
+    # path('report/', include('report.urls')),
+
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
 ]
