@@ -15,11 +15,11 @@
             <img class="logo" src="{% static 'images/Logo.svg' %}" alt="Sky Connect logo">
         </a>
         <ul>
-            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="http://127.0.0.1:8000/teams/">Teams</a></button></li>
-            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="http://127.0.0.1:8000/Organization/">Organization</a></button></li>
-            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="http://127.0.0.1:8000/messages/">Messages</a></button></li>
-            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="http://127.0.0.1:8000/Schedule/">Schedule</a></button></li>
-            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="http://127.0.0.1:8000/Reports/">Reports</a></button></li>
+            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="/teams/">Teams</a></button></li>
+            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="/Organization/">Organization</a></button></li>
+            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="/messages/">Messages</a></button></li>
+            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="/Schedule/">Schedule</a></button></li>
+            <li><button class="sidebarButton"><a class="SidebarText sidebarButton" href="/Reports/">Reports</a></button></li>
         </ul>
     </div>
 
@@ -34,8 +34,8 @@
                     </button>
                 </div>
                 <div class="dropdownContent" id="dropdownMenu">
-                    <button class="dropdownButton"><a class="dropdownText" href="http://127.0.0.1:8000/settings/">Settings</a></button>
-                    <button class="dropdownButton"><a class="dropdownText" href="http://127.0.0.1:8000/profile/">Profile</a></button>
+                    <button class="dropdownButton"><a class="dropdownText" href="/settings/">Settings</a></button>
+                    <button class="dropdownButton"><a class="dropdownText" href="/profile/">Profile</a></button>
                     {% if user.is_authenticated %}
                         <form method="post" action="{% url 'logout' %}" style="display:inline;">
                             {% csrf_token %}
