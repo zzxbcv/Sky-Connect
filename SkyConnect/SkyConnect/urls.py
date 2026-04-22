@@ -2,7 +2,8 @@
 URL configuration for SkyConnect project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
+# For more information on this file, see
+# https://docs.djangoproject.com/en/5.2/topics/settings/
 """
 
 from django.contrib import admin
@@ -15,8 +16,6 @@ urlpatterns = [
 
     # dashboard
     path('dashboard/', include('dashboard.urls')),
-
-    path('settings/', include('user_settings.urls')),
 
     # Auth (login, signup)
     path('', include('accounts.urls')),

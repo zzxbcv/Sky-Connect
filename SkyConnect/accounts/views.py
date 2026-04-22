@@ -5,6 +5,12 @@ from django.shortcuts import render, redirect
 from user_messages.models import user_messages
 
 
+def settings_view(request):
+    return render(request, 'settings.html')
+
+def profile_view(request):
+    return render(request, 'profile.html')
+
 def login_view(request):
     if request.method == 'POST':
         user = authenticate(
@@ -14,8 +20,8 @@ def login_view(request):
         )
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
-        return redirect('login')
+            return redirect('/dashboard/')
+        return redirect('/login/')
 
     return render(request, 'login.html')
 
@@ -33,7 +39,7 @@ def signup_view(request):
                 email=email,
                 password=password
             )
-            return redirect('login')
+            return redirect('/login/')
 
     return render(request, "signup.html")
 
@@ -42,7 +48,7 @@ def delete_message(request):
     delete_id = request.POST.get("delete_id")
 
     if not delete_id:
-        return redirect('messages')
+        return redirect('/messages/')
 
     try:
         msg = user_messages.objects.get(id=delete_id, sender=request.user)
@@ -50,7 +56,7 @@ def delete_message(request):
     except user_messages.DoesNotExist:
         pass
 
-    return redirect('messages')
+    return redirect('/messages/')
 
 
 def save_or_update_message(request):
@@ -62,20 +68,20 @@ def save_or_update_message(request):
     receiver_email = request.POST.get("receiver_email")
 
     if request.POST.get("delete_btn"):
-        return redirect('messages')
+        return redirect('/messages/')
 
     if action not in ["send", "draft"]:
-        return redirect('messages')
+        return redirect('/messages/')
 
     if action == "send":
         if not subject or not receiver_email:
-            return redirect('messages')
+            return redirect('/messages/')
 
     receiver = None
     if receiver_email:
         receiver = User.objects.filter(email=receiver_email).first()
         if not receiver and action == "send":
-            return redirect('messages')
+            return redirect('/messages/')
 
     if message_id:
         try:
@@ -97,7 +103,7 @@ def save_or_update_message(request):
             is_draft=(action == "draft")
         )
 
-    return redirect('messages')
+    return redirect('/messages/')
 
 
 @login_required
@@ -109,7 +115,7 @@ def messages_page(request):
         if request.POST.get("action"):
             return save_or_update_message(request)
 
-        return redirect('messages')
+        return redirect('/messages/')
 
     inbox = user_messages.objects.filter(receiver=request.user, is_draft=False)
     sent = user_messages.objects.filter(sender=request.user, is_draft=False)
